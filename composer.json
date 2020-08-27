@@ -1,0 +1,54 @@
+{
+    "name": "abhiteshd/programming-quotes",
+    "description": "Get random programming quote for your project.",
+    "keywords": [
+        "abhiteshd",
+        "programming-quotes"
+    ],
+    "homepage": "https://github.com/abhiteshd/programming-quotes",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Abhitesh Das",
+            "email": "abhitesh.das@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Abhiteshd\\ProgrammingQuotes\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Abhiteshd\\ProgrammingQuotes\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Abhiteshd\\ProgrammingQuotes\\ProgrammingQuotesServiceProvider"
+            ],
+            "aliases": {
+                "ProgrammingQuotes": "Abhiteshd\\ProgrammingQuotes\\ProgrammingQuotesFacade"
+            }
+        }
+    }
+}
