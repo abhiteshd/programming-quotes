@@ -16,29 +16,17 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "guzzlehttp/guzzle": "^7.0"
+        "php": "^7.1"
     },
-
-
-
-
-
     "require-dev": {
         "orchestra/testbench": "^4.0",
         "phpunit/phpunit": "^8.0"
     },
-
-
-
-
     "autoload": {
         "psr-4": {
             "Abhiteshd\\ProgrammingQuotes\\": "src"
         }
     },
-
-
     "autoload-dev": {
         "psr-4": {
             "Abhiteshd\\ProgrammingQuotes\\Tests\\": "tests"
@@ -58,8 +46,9 @@
                 "Abhiteshd\\ProgrammingQuotes\\ProgrammingQuotesServiceProvider"
             ],
             "aliases": {
-                "RandomQuotes": "Abhiteshd\\ProgrammingQuotes\\Facades\\RandomQuotes"
+                "ProgrammingQuotes": "Abhiteshd\\ProgrammingQuotes\\ProgrammingQuotesFacade"
             }
         }
     }
+
 }
