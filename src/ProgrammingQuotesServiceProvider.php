@@ -2,6 +2,9 @@
 
 namespace Abhiteshd\ProgrammingQuotes;
 
+use Abhiteshd\ProgrammingQuotes\Console\RandomQuotesCommand;
+use Abhiteshd\ProgrammingQuotes\Http\Controllers\RandomQuoteController;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class ProgrammingQuotesServiceProvider extends ServiceProvider
@@ -11,37 +14,38 @@ class ProgrammingQuotesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'programming-quotes');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'programming-quotes');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        /** Register your custom command */
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                RandomQuotesCommand::class,
+            ]);
+        }
+
+        /** register the route */
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'random-quotes');
+
+//        Route::get('random-quote', [RandomQuoteController::class, 'index']);
+
+
+
+
+        Route::get(config('random-quotes.route'), [RandomQuoteController::class, 'index']);
+
+
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('programming-quotes.php'),
+                __DIR__.'/../config/config.php' => config_path('random-quotes.php'),
             ], 'config');
 
             // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/programming-quotes'),
-            ], 'views');*/
+            $this->publishes([
+                __DIR__.'/../resources/views' => resource_path('views/vendor/random-quotes'),
+            ], 'views');
 
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/programming-quotes'),
-            ], 'assets');*/
 
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/programming-quotes'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
         }
+
     }
 
     /**
@@ -49,12 +53,15 @@ class ProgrammingQuotesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'programming-quotes');
 
         // Register the main class to use with the facade
-        $this->app->singleton('programming-quotes', function () {
+        $this->app->singleton('random-quotes', function () {
             return new ProgrammingQuotes;
         });
+
+
+        // apply the package configuration
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'random-quotes');
+
     }
 }
